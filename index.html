@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #calculator {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+    <title>Offset Printing Press Calculator</title>
+</head>
+<body>
+
+    <div id="calculator">
+        <h2>Offset Printing Press Calculator</h2>
+
+        <label for="paperType">Paper Type:</label>
+        <select id="paperType">
+            <option value="maplito">Maplito</option>
+            <option value="a4">A4</option>
+            <option value="demo1">Demo1</option>
+            <option value="demo2">Demo2</option>
+        </select>
+
+        <label for="paperSize">Paper Size:</label>
+        <select id="paperSize">
+            <option value="10gsm">10gsm</option>
+            <option value="14gsm">14gsm</option>
+            <option value="4gsm">4gsm</option>
+        </select>
+
+        <label for="colorType">Color Type:</label>
+        <select id="colorType">
+            <option value="one_color">One Color</option>
+            <option value="multi_color">Multi Color</option>
+        </select>
+
+        <button onclick="calculatePrice()">Calculate Price</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function calculatePrice() {
+            const paperType = document.getElementById('paperType').value;
+            const paperSize = document.getElementById('paperSize').value;
+            const colorType = document.getElementById('colorType').value;
+
+            const paperTypePrices = { maplito: 14, a4: 17, demo1: 12, demo2: 9 };
+            const paperSizePrices = { '10gsm': 2, '14gsm': 3, '4gsm': 4 };
+            const colorPrices = { one_color: 30, multi_color: 42 };
+
+            if (!(paperType in paperTypePrices) || !(paperSize in paperSizePrices) || !(colorType in colorPrices)) {
+                document.getElementById('result').innerText = "Invalid input values. Please check your input and try again.";
+                return;
+            }
+
+            const totalPrice = paperTypePrices[paperType] + paperSizePrices[paperSize] + colorPrices[colorType];
+            document.getElementById('result').innerText = `Total price for ${paperType}, ${paperSize}, ${colorType}: ${totalPrice} rupees.`;
+        }
+    </script>
+
+</body>
+</html>
